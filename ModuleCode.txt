@@ -1,0 +1,47 @@
+Sub FasterVLOOKUP(wb1 As Workbook, wb2 As Workbook, s1Ws As Worksheet, s2Ws As Worksheet, apply As String, pastee As String, cm As String, cmm As String)
+    Dim s1LastRow As Long, s2LastRow As Long, i As Long
+    
+    s1LastRow = s1Ws.Range(cm & Rows.Count).End(xlUp).Row
+    s2LastRow = s2Ws.Range(cmm & Rows.Count).End(xlUp).Row
+    
+    ' Create dictionaries to hold lookup data
+    Dim dict As Object, valuesDict As Object
+    Set dict = CreateObject("Scripting.Dictionary")
+    Set valuesDict = CreateObject("Scripting.Dictionary")
+    
+    Dim ap As Integer
+    ap = 0
+    If Not apply = "" Then
+        ap = Range(apply & "1").Column
+    End If
+    
+    Dim pa As Integer
+    pa = 0
+    If Not pastee = "" Then
+        pa = Range(pastee & "1").Column
+    End If
+
+    Application.ScreenUpdating = False
+    Application.Calculation = xlCalculationManual
+    
+    For i = 2 To s2LastRow
+        dict.Add Key:=s2Ws.Cells(i, cmm).Value, Item:=i
+        valuesDict.Add Key:=i, Item:=s2Ws.Cells(i, ap).Value
+    Next i
+    
+    For i = 2 To s1LastRow
+        Dim lkey As Variant
+        lkey = s1Ws.Cells(i, cm).Value2
+        On Error Resume Next
+        s1Ws.Cells(i, pa).Value = valuesDict(dict(lkey))
+    Next i
+    
+    Application.Calculation = xlCalculationAutomatic
+    Application.ScreenUpdating = True
+    MsgBox "Task Completed!"
+
+End Sub
+
+Sub form()
+    userform1.show
+End Sub
