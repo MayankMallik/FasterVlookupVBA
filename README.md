@@ -1,5 +1,5 @@
 # FasterVlookupVBA
-This repository contains a macro-enabled excel file (.xlsm file), and 2 text files which contain the code of userform and module respectively.
+This repository contains a macro-enabled excel file (.xlsm file), and 2 text files which contain the VBA code of userform and module.
 
 In the excel file, there is 1 sheet named Instructions which contains all the instructions and disclaimers to be taken into consideration before running vlookup
 
