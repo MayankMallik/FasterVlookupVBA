@@ -1,0 +1,33 @@
+Option Explicit
+Dim wb1 As Workbook, wb2 As Workbook
+Dim s1Ws As Worksheet, s2Ws As Worksheet
+Dim apply As String, pastee As String
+Dim cm As String, cmm As String
+
+Private Sub CancelButton_Click()
+    Unload userform1
+End Sub
+
+Private Sub ResetButton_Click()
+    TextBox1.Value = ""
+    TextBox2.Value = ""
+    TextBox3.Value = ""
+    TextBox4.Value = ""
+    TextBox5.Value = ""
+    TextBox6.Value = ""
+    TextBox7.Value = ""
+    TextBox8.Value = ""
+End Sub
+
+Private Sub SubmitButton_Click()
+    Set wb1 = Workbooks(TextBox1.Value)
+    Set wb2 = Workbooks(TextBox2.Value)
+    Set s1Ws = wb1.Worksheets(TextBox3.Value)
+    Set s2Ws = wb2.Worksheets(TextBox4.Value)
+    
+    apply = TextBox5.Value
+    pastee = TextBox6.Value
+    cm = TextBox7.Value
+    cmm = TextBox8.Value
+    Call FasterVLOOKUP(wb1, wb2, s1Ws, s2Ws, apply, pastee, cm, cmm)
+End Sub
